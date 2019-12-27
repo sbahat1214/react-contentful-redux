@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import Banner from './Banner'
 import Title from './Title'
 import FeaturedRooms from './FeaturedRooms'
@@ -7,12 +7,15 @@ import {NavLink, Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 import * as actionCreators from '../store/actions/rootActions'
 
+import {Helmet} from 'react-helmet'
+
 
 
 const Home = (props) => {
-    useEffect(()=> {
-        props.getRooms()
-    })
+
+    if(props.RoomsData.length===0){
+        props.getRooms();
+    }
 
     // useEffect(()=>{
     //     Client.getEntries().then(res=> console.log('response',res))
@@ -21,6 +24,12 @@ const Home = (props) => {
     // JJ
     return (
         <div>
+            <Helmet>
+            <title>React +  Redux + Contentful as a DataStore + Material UI</title>
+            <meta name="description" 
+            content="React +  Redux + Contentful as a DataStore + Material UI + React Helmet for SEO.
+             Use this App to explore the power of react" />
+            </Helmet>
             <Banner title="React + Contentful"
             subTitle="React +  Redux + Contentful as a DataStore + Material UI"
             smallTitle="Use this App to explore the power of react"

@@ -2,9 +2,15 @@ import React from 'react'
 import {Card, CardActionArea, CardMedia, CardContent, Typography} from '@material-ui/core'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import * as actionCreators from '../store/actions/rootActions'
+
+
 
 
 const AllRooms = (props) => {
+    if(props.RoomsData.length===0){
+        props.getRooms()
+    }
     return (
         <div className="container pt-5">
             <div className="row">
@@ -53,4 +59,10 @@ const mapStateToProps= (state) => {
     }
 }
 
-export default connect(mapStateToProps)(AllRooms)
+const mapDispatchToProps = (dispatch) => {
+    return{
+        getRooms: () => dispatch(actionCreators.GetRooms())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllRooms)

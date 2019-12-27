@@ -5,6 +5,7 @@ import bgImage from '../assets/images/bgImage.jpg'
 import Title from './Title'
 import AllRooms from './AllRooms';
 
+
 const Rooms = () => {
     return (
         <div>
@@ -23,5 +24,9 @@ const Rooms = () => {
         </div>
     )
 }
+
+
+
+
 
 export default Rooms

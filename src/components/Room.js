@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import Banner from './Banner'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -6,21 +6,22 @@ import { connect } from 'react-redux'
 import {Paper} from '@material-ui/core'
 import Title from './Title'
 import * as actionCreators from '../store/actions/rootActions'
+import {Helmet} from 'react-helmet'
 
 const Room = (props) => {
     const [url] = useState(props.match.params.post_id)
 
-    useEffect(()=>{
-        if(props.gotRoomsData.length===0){
-            // props.getRooms();
-            console.log("zero")
-        }
-    })
+    
     // console.log(props.RoomsData, url)
     let RoomsDataFromHome;
     if(props.RoomsData.length===0){
         // console.log("zero here")
-        props.getRooms();
+        
+
+            // eslint-disable-next-line no-unused-expressions
+            <h1>Loading ...</h1>
+            props.getRooms();
+        
         // RoomsDataFromHome=(
         //    <div>
         //         <Banner title="Sorry"
@@ -44,12 +45,18 @@ const Room = (props) => {
         <div>
             
             
+            
             {props.RoomsData.map(
                 // eslint-disable-next-line
                 singleRoom=>{
                 if(singleRoom.fields.url===url){
                     return(
                         <div key={singleRoom.fields.title}>
+                            <Helmet>
+                                <title>{singleRoom.fields.title} </title>
+                                <meta name="description" 
+                                content={singleRoom.fields.shortDescription} />
+                            </Helmet>
                             <Banner title={singleRoom.fields.title}
                             bgImage={singleRoom.fields.image.fields.file.url}>
                                 <button className="btn btn-primary"><Link to="/rooms">Find Other Room</Link> </button>
