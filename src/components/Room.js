@@ -1,13 +1,20 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Banner from './Banner'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import logo from '../assets/images/bgImage.jpg'
 import {Paper} from '@material-ui/core'
 import Title from './Title'
+import * as actionCreators from '../store/actions/rootActions'
 
 const Room = (props) => {
     const [url] = useState(props.match.params.post_id)
+
+    useEffect(()=>{
+        if(props.gotRoomsData===false){
+            props.getRooms();
+        }
+    })
     // console.log(props.RoomsData, url)
     let RoomsDataFromHome;
     if(props.RoomsData.length===0){
@@ -91,10 +98,16 @@ const Room = (props) => {
 
 const mapStateToProps = (state) => {
     return{
-        RoomsData: state.RoomsData
+        RoomsData: state.RoomsData, 
+        gotRoomsData: state.gotRoomsData
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getRooms: () => dispatch(actionCreators.GetRooms())
     }
 }
 
 
 
-export default connect(mapStateToProps)(Room)
+export default connect(mapStateToProps, mapDispatchToProps)(Room)

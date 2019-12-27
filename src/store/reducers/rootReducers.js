@@ -1,6 +1,7 @@
 const initialState = {
     RoomsData:[],
-    title:''
+    title:'',
+    gotRoomsData:false
 }
 
 const RootReducers = (state = initialState, action) => {
@@ -9,7 +10,8 @@ const RootReducers = (state = initialState, action) => {
         case 'GET_ROOMS':
             return {
                 ...state,
-                RoomsData: action.payload
+                RoomsData: action.payload,
+                gotRoomsData:true
             }
         
         default:
