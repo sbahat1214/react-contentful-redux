@@ -18,6 +18,7 @@ const Home = (props) => {
     //     Client.getEntries().then(res=> console.log('response',res))
     // })
     // console.log(props)
+    // JJ
     return (
         <div>
             <Banner title="React + Contentful"
