@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Banner from './Banner'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import logo from '../assets/images/bgImage.jpg'
+// import logo from '../assets/images/bgImage.jpg'
 import {Paper} from '@material-ui/core'
 import Title from './Title'
 import * as actionCreators from '../store/actions/rootActions'
@@ -11,31 +11,34 @@ const Room = (props) => {
     const [url] = useState(props.match.params.post_id)
 
     useEffect(()=>{
-        if(props.gotRoomsData===false){
-            props.getRooms();
+        if(props.gotRoomsData.length===0){
+            // props.getRooms();
+            console.log("zero")
         }
     })
     // console.log(props.RoomsData, url)
     let RoomsDataFromHome;
     if(props.RoomsData.length===0){
-        RoomsDataFromHome=(
-           <div>
-                <Banner title="Sorry"
-                subTitle="Go Home and Select Any Room"
-                bgImage={logo}>
-                    <Link to="/">
-                    <button className="btn btn-primary ">
-                       Go Home 
-                    </button>
-                    </Link>
-                    <Link to="/rooms">
-                    <button className="btn btn-primary ml-1">
-                       Rooms
-                    </button>
-                    </Link>
-                </Banner>
-           </div>
-        )
+        // console.log("zero here")
+        props.getRooms();
+        // RoomsDataFromHome=(
+        //    <div>
+        //         <Banner title="Sorry"
+        //         subTitle="Go Home and Select Any Room"
+        //         bgImage={logo}>
+        //             <Link to="/">
+        //             <button className="btn btn-primary ">
+        //                Go Home 
+        //             </button>
+        //             </Link>
+        //             <Link to="/rooms">
+        //             <button className="btn btn-primary ml-1">
+        //                Rooms
+        //             </button>
+        //             </Link>
+        //         </Banner>
+        //    </div>
+        // )
     }
     return (
         <div>
